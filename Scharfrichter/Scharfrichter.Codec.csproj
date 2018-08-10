@@ -59,6 +59,7 @@
     <Compile Include="Charts\Beatmania7Key.cs" />
     <Compile Include="Charts\BeatmaniaIII.cs" />
     <Compile Include="Encryption\BemaniPCEout.cs" />
+    <Compile Include="Sounds\BenamiS3VSound.cs" />
     <Compile Include="Sounds\RF5C400.cs" />
     <Compile Include="Sounds\YMZ280B.cs" />
     <Compile Include="XACT3\Xact3WaveBank.cs" />
@@ -94,6 +95,10 @@
     <Compile Include="Videos\%40Video.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NAudio.WindowsMediaFormat\NAudio.WindowsMediaFormat.csproj">
+      <Project>{1868fc77-fd6f-4881-9cf5-de7451806bfa}</Project>
+      <Name>NAudio.WindowsMediaFormat</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NAudio\NAudio.csproj">
       <Project>{DA4F02E3-0B5E-42CD-B8D9-5583FA51D66E}</Project>
       <Name>NAudio</Name>

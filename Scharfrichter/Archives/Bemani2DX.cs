@@ -86,7 +86,38 @@ namespace Scharfrichter.Codec.Archives
                 reader = new BinaryReader(decodedData);
             }
 
-            // header length is at 0x10
+            // Check whether s3p file format
+            reader.BaseStream.Position = 0x0;
+            var fileFormat = new string(reader.ReadChars(4));
+            if (fileFormat == "S3P0")
+            {
+                //sample count at 0x04
+                //offset/size list start at 0x08
+                var sampleCount = reader.ReadInt32();
+                var sampleInfos = new Tuple<int,int>[sampleCount];
+                for (var sampleIndex = 0; sampleIndex < sampleCount; sampleIndex++)
+                {
+                    var sampleOffset = reader.ReadInt32();
+                    var sampleSize = reader.ReadInt32();
+                    var tuple = new Tuple<int,int>(sampleOffset, sampleSize);
+                    sampleInfos[sampleIndex] = tuple;
+                }
+
+                for (var i = 0; i < sampleInfos.Length; i++)
+                {
+                    reader.BaseStream.Position = sampleInfos[i].Item1;
+                    result.sounds.Add(BenamiS3VSound.Read(reader.BaseStream));
+                }
+            }
+            else
+                Read2DXSounds(reader, result);
+
+            return result;
+        }
+
+        private static void Read2DXSounds(BinaryReader reader, Bemani2DX result)
+        {
+// header length is at 0x10
             // sample count is at 0x14
             // offset list starts at 0x48
 
@@ -108,8 +139,6 @@ namespace Scharfrichter.Codec.Archives
                 reader.BaseStream.Position = sampleOffset[i];
                 result.sounds.Add(Bemani2DXSound.Read(reader.BaseStream));
             }
-            
-            return result;
         }
 
         public override Sound[] Sounds

@@ -106,6 +106,14 @@ namespace ConvertHelper
                                 ConvertSounds(archive.Sounds, filename, 0.6f);
                             }
                             break;
+                        case @".S3P":
+                            using (MemoryStream source = new MemoryStream(data))
+                            {
+                                Console.WriteLine("Converting Samples");
+                                Bemani2DX archive = Bemani2DX.Read(source);
+                                ConvertSounds(archive.Sounds, filename, 0.6f);
+                            }
+                            break;
                         case @".CS":
                             using (MemoryStream source = new MemoryStream(data))
                                 ConvertChart(BeatmaniaIIDXCSNew.Read(source), config, filename, -1, null);

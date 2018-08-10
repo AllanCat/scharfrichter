@@ -86,6 +86,15 @@ namespace ConvertHelper
                                 }
                             }
                             break;
+                        case @".S3P":
+                            if (sounds == null)
+                            {
+                                using (MemoryStream mem = new MemoryStream(File.ReadAllBytes(filename)))
+                                {
+                                    sounds = Bemani2DX.Read(mem).Sounds;
+                                }
+                            }
+                            break;
                     }
                 }
             }
