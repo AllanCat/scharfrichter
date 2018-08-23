@@ -39,9 +39,10 @@ namespace Scharfrichter.Codec.Sounds
                 int dataLength = reader.ReadInt32();
                 reader.BaseStream.Position = samplePos + infoLength;
                 byte[] wmaData = reader.ReadBytes(dataLength);
-                File.WriteAllBytes("audio.asf",wmaData);
+                var tempFile = Path.GetTempFileName();
+                File.WriteAllBytes(tempFile,wmaData);
                 
-                using (var wmaStream = new WmaStream("audio.asf"))
+                using (var wmaStream = new WmaStream(tempFile))
                 {
                     var wavData = new byte[wmaStream.Length];
                     

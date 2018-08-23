@@ -6,15 +6,31 @@ using Scharfrichter.Common;
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 
 namespace ConvertHelper
 {
+    public enum ChartDifficulty
+    {
+        SPH,
+        SPN,
+        SPA,
+        DPH = 6,
+        DPN,
+        DPA
+    }
+    public class RenderResult
+    {
+        public readonly List<ChartDifficulty> Difficulties = new List<ChartDifficulty>();
+        public string OutputFileName;
+    }
+
     static public class Render
     {
-        static public void RenderWAV(string[] inArgs, long unitNumerator, long unitDenominator)
+        static public RenderResult[] RenderWAV(string[] inArgs, long unitNumerator, long unitDenominator)
         {
             Splash.Show("Render");
             Console.WriteLine("Timing: " + unitNumerator.ToString() + "/" + unitDenominator.ToString());
@@ -49,7 +65,7 @@ namespace ConvertHelper
             Chart[] charts = null;
             bool cancel = false;
             string outFile = null;
-
+            List<RenderResult> results = new List<RenderResult>();
             foreach (string filename in args)
             {
                 if (cancel)
@@ -144,16 +160,27 @@ namespace ConvertHelper
                     if (!match)
                     {
                         Console.WriteLine("Writing unique " + k.ToString());
-                        File.WriteAllBytes(outFile + "-" + Util.ConvertToDecimalString(k, 2) + ".wav", data);
+                        
+                        var path = outFile + "-" + Util.ConvertToDecimalString(k, 2) + ".wav";
+                        File.WriteAllBytes(path, data);
                         rendered.Add(data);
                         renderedIndex.Add(k);
+                        var result = new RenderResult();
+                        result.Difficulties.Add((ChartDifficulty)k);
+                        result.OutputFileName = path;
+                        results.Add(result);
                     }
                     else
                     {
                         Console.WriteLine("Matches " + renderedIndex[matchIndex].ToString());
+                        var difficulty = (ChartDifficulty)k;
+                        var renderedResult = results.Find(r => r.Difficulties.Contains((ChartDifficulty)matchIndex));
+                        Debug.Assert(renderedResult!=null,"renderedResult!=null");
+                        renderedResult.Difficulties.Add(difficulty);
                     }
                 }
             }
+            return results.ToArray();
         }
     }
 }
