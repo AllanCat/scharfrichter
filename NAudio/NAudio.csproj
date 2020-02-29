@@ -164,6 +164,7 @@
     <Compile Include="Utils\ByteArrayExtensions.cs" />
     <Compile Include="Utils\FieldDescriptionHelper.cs" />
     <Compile Include="Utils\IEEE.cs" />
+    <Compile Include="Utils\MarshalHelpers.cs" />
     <Compile Include="Utils\NativeMethods.cs" />
     <Compile Include="Wave\Asio\AsioDriverCapability.cs" />
     <Compile Include="Wave\Asio\AsioSampleType.cs" />

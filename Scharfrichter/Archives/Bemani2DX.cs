@@ -111,7 +111,7 @@ namespace Scharfrichter.Codec.Archives
             }
             else
                 Read2DXSounds(reader, result);
-
+            reader.Dispose();
             return result;
         }
 

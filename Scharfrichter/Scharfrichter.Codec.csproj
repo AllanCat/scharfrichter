@@ -54,9 +54,18 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NAudio, Version=1.10.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\NAudio.1.10.0\lib\net35\NAudio.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NAudio.WindowsMediaFormat, Version=1.0.1.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\NAudio.Wma.1.0.1\lib\net35\NAudio.WindowsMediaFormat.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -76,9 +85,16 @@
     <Compile Include="Archives\Zip.cs" />
     <Compile Include="Charts\Beatmania7Key.cs" />
     <Compile Include="Charts\BeatmaniaIII.cs" />
+    <Compile Include="Effect\DynamicRangeCompressnion.cs" />
+    <Compile Include="Effect\Effect.cs" />
+    <Compile Include="Effect\EffectParameter.cs" />
+    <Compile Include="Effect\NormalizeEffect.cs" />
+    <Compile Include="Effect\SoftLimiter.cs" />
     <Compile Include="Encryption\BemaniPCEout.cs" />
     <Compile Include="Sounds\BenamiS3VSound.cs" />
     <Compile Include="Sounds\RF5C400.cs" />
+    <Compile Include="Sounds\SoundElement.cs" />
+    <Compile Include="Sounds\SoundPacker.cs" />
     <Compile Include="Sounds\YMZ280B.cs" />
     <Compile Include="XACT3\Xact3WaveBank.cs" />
     <Compile Include="BinaryIO.cs" />
@@ -113,14 +129,7 @@
     <Compile Include="Videos\%40Video.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NAudio.WindowsMediaFormat\NAudio.WindowsMediaFormat.csproj">
-      <Project>{1868fc77-fd6f-4881-9cf5-de7451806bfa}</Project>
-      <Name>NAudio.WindowsMediaFormat</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NAudio\NAudio.csproj">
-      <Project>{DA4F02E3-0B5E-42CD-B8D9-5583FA51D66E}</Project>
-      <Name>NAudio</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

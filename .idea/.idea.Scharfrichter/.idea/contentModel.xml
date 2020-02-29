@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\LASK\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\LASK\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_Scharfrichter.1881466736.00" t="ExcludeRecursive" />
+    <e p="E:\Users\LASK\Documents\scharfrichter" t="IncludeFlat">
+      <e p="BeatmaniaPS2Extract" t="IncludeRecursive">
+        <e p="BeatmaniaPS2Extract.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+      </e>
+      <e p="BemaniToBMS" t="IncludeRecursive">
+        <e p="BemaniToBMS.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+      </e>
+      <e p="BemaniToBMSGold" t="IncludeRecursive">
+        <e p="BemaniToBMSGold.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+      </e>
+      <e p="BemaniToBMSTroopers" t="IncludeRecursive">
+        <e p="BemaniToBMSTroopers.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+      </e>
+      <e p="BemaniToSM" t="IncludeRecursive">
+        <e p="BemaniToSM.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+      </e>
+      <e p="ConvertHelper" t="IncludeRecursive">
+        <e p="BemaniToBMS.cs" t="Include" />
+        <e p="BemaniToSM.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="ConvertHelper.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="Render.cs" t="Include" />
+        <e p="StereoCombiner.cs" t="Include" />
+        <e p="StreamAdapter.cs" t="Include" />
+      </e>
+      <e p="DDRPSXExtract" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="DDRPSXExtract.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+      </e>
+      <e p="DJMainExtract" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="DJMainExtract.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+      </e>
+      <e p="FirebeatDecompress" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="FirebeatDecompress.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+      </e>
+      <e p="FirebeatIIIExtract" t="IncludeRecursive">
+        <e p="FirebeatIIIExtract.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+      </e>
+      <e p="IFSExtract" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="IFSExtract.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+      </e>
+      <e p="IIDXDBGenerator" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="IIDXDBGenerator.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+      </e>
+      <e p="LZDecompress" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="LZDecompress.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+      </e>
+      <e p="LZSS2Decompress" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="LZSS2Decompress.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+      </e>
+      <e p="MegaToast" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Form1.cs" t="Include" />
+        <e p="Form1.Designer.cs" t="Include" />
+        <e p="Form1.resx" t="Include" />
+        <e p="MegaToast.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+          <e p="Resources.Designer.cs" t="Include" />
+          <e p="Resources.resx" t="Include" />
+          <e p="Settings.Designer.cs" t="Include" />
+          <e p="Settings.settings" t="Include" />
+        </e>
+      </e>
+      <e p="MegaToast.UI" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="MegaToast.UI.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="TableForm.cs" t="Include" />
+      </e>
+      <e p="NAudio" t="IncludeRecursive">
+        <e p="NAudio.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="NAudio.WindowsMediaFormat" t="IncludeRecursive">
+        <e p="NAudio.WindowsMediaFormat.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="NAudio.WindowsMediaFormat.Tests" t="IncludeRecursive">
+        <e p="NAudio.WindowsMediaFormat.Tests.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="Output" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="PreviewGenerator" t="IncludeRecursive">
+        <e p="app.config" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="PreviewGenerator.csproj" t="IncludeRecursive" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="S3VSound.cs" t="Include" />
+        <e p="Sound2DXPacker.cs" t="Include" />
+      </e>
+      <e p="Render2DXTroopers" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="Render2DXTroopers.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="scharfrichter" t="IncludeRecursive">
+        <e p="Archives" t="Include">
+          <e p="@Archive.cs" t="Include" />
+          <e p="Bemani1.cs" t="Include" />
+          <e p="Bemani2DX.cs" t="Include" />
+          <e p="BemaniIFS.cs" t="Include" />
+          <e p="BemaniSSP.cs" t="Include" />
+          <e p="BemaniSSQ.cs" t="Include" />
+          <e p="BMS.cs" t="Include" />
+          <e p="DJMain.cs" t="Include" />
+          <e p="Firebeat.cs" t="Include" />
+          <e p="Gzip.cs" t="Include" />
+          <e p="MicrosoftXWB.cs" t="Include" />
+          <e p="StepmaniaSM.cs" t="Include" />
+          <e p="Twinkle.cs" t="Include" />
+          <e p="Zip.cs" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="BinaryIO.cs" t="Include" />
+        <e p="Charts" t="Include">
+          <e p="@Chart.cs" t="Include" />
+          <e p="Beatmania5Key.cs" t="Include" />
+          <e p="Beatmania7Key.cs" t="Include" />
+          <e p="BeatmaniaIIDXCSNew.cs" t="Include" />
+          <e p="BeatmaniaIIDXCSOld.cs" t="Include" />
+          <e p="BeatmaniaIIDXPC.cs" t="Include" />
+          <e p="BeatmaniaIII.cs" t="Include" />
+        </e>
+        <e p="Compression" t="Include">
+          <e p="BemaniLZ.cs" t="Include" />
+          <e p="BemaniLZSS.cs" t="Include" />
+          <e p="BemaniLZSS2.cs" t="Include" />
+          <e p="Huffman.Decoder.cs" t="Include" />
+          <e p="IFSImage.cs" t="Include" />
+        </e>
+        <e p="Effect" t="Include">
+          <e p="DynamicRangeCompressnion.cs" t="Include" />
+          <e p="Effect.cs" t="Include" />
+          <e p="EffectParameter.cs" t="Include" />
+          <e p="NormalizeEffect.cs" t="Include" />
+          <e p="SoftLimiter.cs" t="Include" />
+        </e>
+        <e p="Encryption" t="Include">
+          <e p="BemaniPCAudio.cs" t="Include" />
+          <e p="BemaniPCEout.cs" t="Include" />
+        </e>
+        <e p="Fraction.cs" t="Include" />
+        <e p="Graphics" t="Include">
+          <e p="@Graphic.cs" t="Include" />
+        </e>
+        <e p="Heuristics" t="Include">
+          <e p="Bemani1.cs" t="Include" />
+          <e p="Bemani2DXArchive.cs" t="Include" />
+          <e p="BemaniImage2DXAC.cs" t="Include" />
+          <e p="BemaniModel2DXAC.cs" t="Include" />
+        </e>
+        <e p="Media" t="Include">
+          <e p="CHD.Codec.cs" t="Include" />
+          <e p="CHD.cs" t="Include" />
+          <e p="CHD.Stream.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="packages.config" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="Scharfrichter.Codec.csproj" t="IncludeRecursive" />
+        <e p="Sounds" t="Include">
+          <e p="@Sound.cs" t="Include" />
+          <e p="Bemani2DXSound.cs" t="Include" />
+          <e p="BemaniSD9.cs" t="Include" />
+          <e p="BenamiS3VSound.cs" t="Include" />
+          <e p="K054539.cs" t="Include" />
+          <e p="Render.cs" t="Include" />
+          <e p="RF5C400.cs" t="Include" />
+          <e p="SoundElement.cs" t="Include" />
+          <e p="SoundPacker.cs" t="Include" />
+          <e p="YMZ280B.cs" t="Include" />
+        </e>
+        <e p="Subfolder.cs" t="Include" />
+        <e p="Util.cs" t="Include" />
+        <e p="Videos" t="Include">
+          <e p="@Video.cs" t="Include" />
+        </e>
+        <e p="XACT3" t="Include">
+          <e p="Xact3WaveBank.cs" t="Include" />
+        </e>
+      </e>
+      <e p="Scharfrichter.Common" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Configuration.cs" t="Include" />
+        <e p="Configuration.IIDX.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="Scharfrichter.Common.csproj" t="IncludeRecursive" />
+        <e p="Splash.cs" t="Include" />
+      </e>
+      <e p="Scharfrichter.sln" t="IncludeFlat" />
+      <e p="TwinkleIIDXExtract" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="TwinkleIIDXExtract.csproj" t="IncludeRecursive" />
+      </e>
+    </e>
+  </component>
+</project>
