@@ -16,6 +16,7 @@ namespace PreviewGenerator
         {
             
             Preview(args);
+            //CombineBGM(args);
             //SingleFile(args);
         }
 
@@ -79,17 +80,91 @@ namespace PreviewGenerator
                 var outPath = $"{outputFolder}\\{info.Name}\\{info.Name}_pre.2dx";
                 return chartFile.Exists && (sound2DX.Exists || soundS3P.Exists) && !File.Exists(outPath);
             }).ToArray();
+
             var option = new ParallelOptions();
             option.MaxDegreeOfParallelism = 12;
             Parallel.ForEach(dirs, option, (dir) =>
             {
-
-                if(args[2]=="s3p")
+                if (args[2] == "s3p")
                     GeneratePreview(dir, outputFolder, Render.Codec.Wma);
-                else if(args[2]=="2dx")
+                else if (args[2] == "2dx")
                     GeneratePreview(dir, outputFolder, Render.Codec.Adpcm);
                 else throw new ArgumentException("arg3: 2dx/s3p");
             });
+        }
+
+        private static void CombineBGM(string[] args)
+        {
+            if (args.Length == 3 && args.Contains("-d"))
+            {
+                var source = args[0];
+                var output = args[1];
+                var removeDir = Directory.EnumerateDirectories(source).Where((directory) =>
+                {
+                    var info = new DirectoryInfo(directory);
+                    var chartFile = new FileInfo($"{directory}\\{info.Name}.1");
+                    var previewFile = new FileInfo($"{directory}\\{info.Name}_pre.2dx");
+                    var sound2DX = new FileInfo($"{directory}\\{info.Name}.2dx");
+                    var soundS3P = new FileInfo($"{directory}\\{info.Name}.s3p");
+                    var outputDir = $"{output}\\{info.Name}";
+                    var outPath = $"{output}\\{info.Name}\\{info.Name}_pre.2dx";
+                    var outPath2 = $"{output}\\{info.Name}\\{info.Name}_pre.asf";
+                    return chartFile.Exists && (sound2DX.Exists || soundS3P.Exists) && (File.Exists(outPath) || File.Exists(outPath2));
+                }).ToArray();
+                foreach (var s in removeDir)
+                {
+                    var info = new DirectoryInfo(output);
+                    var previewName = $"{s}\\{Path.GetFileName(s)}_pre.2dx";
+                    //Console.WriteLine(previewName);
+                    var previewFile = new FileInfo(previewName);
+                    if (File.Exists(previewFile.FullName))
+                    {
+                        Console.WriteLine($"Remove {previewFile.FullName}");
+                        File.Delete(previewFile.FullName);
+                    }
+                }
+                return;
+            }
+            if (args.Length != 3)
+            {
+                Console.WriteLine("Usage: arg1: sound folder arg2:outputFolder arg3: s3p/2dx");
+                return;
+            }
+            var soundFolder = args[0];
+            var outputFolder = args[1];
+
+            var dirs = Directory.EnumerateDirectories(soundFolder).Where((directory) =>
+            {
+                var info = new DirectoryInfo(directory);
+                var chartFile = new FileInfo($"{directory}\\{info.Name}.1");
+                var previewFile = new FileInfo($"{directory}\\{info.Name}_pre.2dx");
+                var sound2DX = new FileInfo($"{directory}\\{info.Name}.2dx");
+                var soundS3P = new FileInfo($"{directory}\\{info.Name}.s3p");
+                var outputDir = $"{outputFolder}\\{info.Name}";
+                var outPath = $"{outputFolder}\\{info.Name}\\{info.Name}_pre.2dx";
+                return chartFile.Exists && (sound2DX.Exists || soundS3P.Exists) && !File.Exists(outPath);
+            }).ToArray();
+
+            foreach (var dir in dirs)
+            {
+                if (args[2] == "s3p")
+                    GenerateBGM(dir, outputFolder, Render.Codec.Wma);
+                else if (args[2] == "2dx")
+                    GenerateBGM(dir, outputFolder, Render.Codec.Adpcm);
+                else throw new ArgumentException("arg3: 2dx/s3p");
+            }
+            /*
+            var option = new ParallelOptions();
+            option.MaxDegreeOfParallelism = 1;
+            Parallel.ForEach(dirs, option, (dir) =>
+            {
+                if (args[2] == "s3p")
+                    GenerateBGM(dir, outputFolder, Render.Codec.Wma);
+                else if (args[2] == "2dx")
+                    GenerateBGM(dir, outputFolder, Render.Codec.Adpcm);
+                else throw new ArgumentException("arg3: 2dx/s3p");
+            });
+            */
         }
 
         private static void GeneratePreview(string directory, string outputFolder, Render.Codec codec)
@@ -102,20 +177,23 @@ namespace PreviewGenerator
             var soundS3P = new FileInfo($"{directory}\\{info.Name}.s3p");
             if (chartFile.Exists && (sound2DX.Exists || soundS3P.Exists))
             {
+                /*
                 if (previewFile.Exists)
                 {
                     Console.WriteLine($"Skip: {directory}");
                     return;
                 }
+                */
                 var outputDir = $"{outputFolder}\\{info.Name}";
                 var outPath = $"{outputFolder}\\{info.Name}\\{info.Name}_pre.2dx";
                 Directory.CreateDirectory(outputDir);
                 param[0] = chartFile.FullName;
                 param[1] = soundS3P.Exists ? soundS3P.FullName : sound2DX.FullName;
+
 #if DEBUG
-                RenderSoundDebug(param, outPath);
+                //RenderSoundDebug(param, outPath);
 #else
-                if(codec==Render.Codec.Wma)
+                if (codec==Render.Codec.Wma)
                     RenderSound(param, outPath);
                 else if(codec == Render.Codec.Adpcm)
                     RenderSoundLegacy(param, outPath);
@@ -125,6 +203,93 @@ namespace PreviewGenerator
                 return;
             }
             Console.WriteLine($"Skip: {directory}");
+        }
+
+        private static void GenerateBGM(string directory, string outputFolder, Render.Codec codec)
+        {
+            var param = new string[3];
+            var info = new DirectoryInfo(directory);
+            var chartFile = new FileInfo($"{directory}\\{info.Name}.1");
+            var previewFile = new FileInfo($"{directory}\\{info.Name}_pre.2dx");
+            var sound2DX = new FileInfo($"{directory}\\{info.Name}.2dx");
+            var soundS3P = new FileInfo($"{directory}\\{info.Name}.s3p");
+            if (chartFile.Exists && (sound2DX.Exists || soundS3P.Exists))
+            {
+                var outputDir = $"{outputFolder}\\{info.Name}";
+                var outPath = $"{outputFolder}\\{info.Name}\\{info.Name}.s3p";
+                Directory.CreateDirectory(outputDir);
+                param[0] = chartFile.FullName;
+                param[1] = soundS3P.Exists ? soundS3P.FullName : sound2DX.FullName;
+                param[2] = $"{outputFolder}\\{info.Name}\\{info.Name}.1";
+
+                if (codec == Render.Codec.Wma)
+                    RenderBGMSound(param, outPath);
+                else if (codec == Render.Codec.Adpcm)
+                    RenderBGMSoundLegacy(param, outPath);
+
+                GC.Collect();
+                return;
+            }
+            Console.WriteLine($"Skip: {directory}");
+        }
+
+        private static void RenderBGMSound(string[] args, string fileName)
+        {
+            try
+            {
+                var sounds = ConvertHelper.Render.RenderBGM(args, 1, 1000);
+                if (sounds == null)
+                {
+                    Console.WriteLine($"Generate {fileName} failed.");
+                    return;
+                }
+                using (MemoryStream mem = new MemoryStream(File.ReadAllBytes(args[1])))
+                {
+                    var s3p = new S3PPack(mem);
+                    var s = sounds.Last();
+                    var s3v = new S3VSound(s.Data);
+                    s3p.Add(s3v);
+
+                    File.WriteAllBytes(fileName + ".asf", s.Data);
+                    File.WriteAllBytes(fileName, s3p.Pack());
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
+
+        }
+
+        private static void RenderBGMSoundLegacy(string[] args, string fileName)
+        {
+            try
+            {
+                var sounds = ConvertHelper.Render.RenderBGM(args, 1, 1000, Render.Codec.Adpcm);
+                if (sounds == null)
+                {
+                    Console.WriteLine($"Generate {fileName} failed.");
+                    return;
+                }
+                var packer = new Sound2DXPacker();
+                foreach (var s in sounds)
+                {
+                    var soundElement = new SoundElement(s.Data);
+                    packer.Add(soundElement);
+                    if (s == sounds.Last())
+                    {
+                        File.WriteAllBytes(fileName + ".asf", s.Data);
+                    }
+                }
+                File.WriteAllBytes(fileName, packer.Pack());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
+
         }
 
         private static void RenderSound(string[] args, string fileName)

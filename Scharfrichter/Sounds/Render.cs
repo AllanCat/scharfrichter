@@ -91,7 +91,7 @@ namespace Scharfrichter.Codec.Sounds
             return WriteAdpcmWave(CutoffIntSamples(outputSamples), length);
         }
 
-        static public byte[] RenderToAdpcm(Chart chart, Sound[] sounds, int startTime, int duration)
+        static public byte[] RenderToAdpcm(Chart chart, Sound[] sounds, int startTime, int duration, bool crop = false)
         {
             int[] outputSamples;
             var format = new WaveFormat(44100, 2);
@@ -100,7 +100,11 @@ namespace Scharfrichter.Codec.Sounds
             {
                 if (outputSamples[i] != 0 || outputSamples[i + 1] != 0)
                 {
-                    var samples = outputSamples.Skip(i + startTime * 44100 * 2).Take(duration * 44100 * 2).ToArray();
+                    var samples = outputSamples;
+                    if (crop)
+                    {
+                        samples = outputSamples.Skip(i + startTime * 44100 * 2).Take(duration * 44100 * 2).ToArray();
+                    }
                     PostProcess(samples, 15000);
                     return WriteAdpcmWave(CutoffIntSamples(samples), samples.Length);
                 }
@@ -110,7 +114,7 @@ namespace Scharfrichter.Codec.Sounds
         }
 
 
-        static public byte[] RenderToWma(Chart chart, Sound[] sounds, int startTime, int duration)
+        static public byte[] RenderToWma(Chart chart, Sound[] sounds, int startTime, int duration, bool crop = false)
         {
             int[] outputSamples;
             var format = new WaveFormat(44100, 2);
@@ -119,12 +123,15 @@ namespace Scharfrichter.Codec.Sounds
             {
                 if (outputSamples[i] != 0 || outputSamples[i + 1] != 0)
                 {
-                    var samples = outputSamples.Skip(i + startTime * 44100 * 2).Take(duration * 44100 * 2).ToArray();
+                    var samples = outputSamples;
+                    if (crop)
+                    {
+                        samples = outputSamples.Skip(i + startTime * 44100 * 2).Take(duration * 44100 * 2).ToArray();
+                    }
                     PostProcess2(samples);
                     return WriteWma(format, CutoffIntSamples(samples), samples.Length);
                 }
             }
-
             return WriteWma(format, CutoffIntSamples(outputSamples), length);
         }
 
@@ -239,8 +246,10 @@ namespace Scharfrichter.Codec.Sounds
         [ThreadStatic] private static byte[] postProcessDestBuffer;
         private static void PostProcess2(int[] samples)
         {
-            ResizeBuffer(ref postProcessSourceBuffer, samples.Length*4);
-            ResizeBuffer(ref postProcessDestBuffer, samples.Length*4);
+            postProcessSourceBuffer = new byte[samples.Length * 4];
+            postProcessDestBuffer = new byte[samples.Length * 4];
+            //ResizeBuffer(ref postProcessSourceBuffer, samples.Length*4);
+            //ResizeBuffer(ref postProcessDestBuffer, samples.Length*4);
             var min = int.MaxValue;
             var max = int.MinValue;
             

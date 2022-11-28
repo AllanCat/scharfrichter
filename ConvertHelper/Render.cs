@@ -267,7 +267,148 @@ namespace ConvertHelper
                 }
             }
 
-            if (!cancel && (sounds != null) && (charts != null))
+            return RenderTo(charts, sounds, 50, 10, codec, true);
+            
+            sounds = null;
+            throw new FileNotFoundException("No chart to render");
+
+        }
+
+        static public Sound[] RenderBGM(string[] inArgs, long unitNumerator, long unitDenominator, Codec codec = Codec.Wma)
+        {
+            string[] args;
+            args = inArgs;
+
+            if (args.Length == 0)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Usage: Render2DX <files..>");
+                Console.WriteLine();
+                Console.WriteLine("Drag and drop with files and folders is fully supported for this application.");
+                Console.WriteLine();
+                Console.WriteLine("You must have both the chart file (.1) and the sound file (.2dx).");
+                Console.WriteLine("Supported formats:");
+                Console.WriteLine("1, 2DX");
+            }
+
+            
+            Bemani2DX bemani2dx = null;
+            Bemani1 bemani1 = null;
+            Bemani1 bemani2 = null;
+            //Sound[] sounds = null;
+            //Chart[] charts = null;
+            bool cancel = false;
+            string outFile = null;
+            List<RenderResult> results = new List<RenderResult>();
+            foreach (string filename in args)
+            {
+                if (cancel)
+                    break;
+
+                if (File.Exists(filename))
+                {
+                    switch (Path.GetExtension(filename).ToUpper())
+                    {
+                        case @".1":
+                            if (bemani1 == null)
+                            {
+                                //Console.WriteLine();
+                                Console.WriteLine("Valid charts: " + filename);
+                                outFile = Path.Combine(Path.GetDirectoryName(filename), Path.GetFileNameWithoutExtension(filename));
+                                using (MemoryStream mem = new MemoryStream(File.ReadAllBytes(filename)))
+                                {
+                                    bemani1 = Bemani1.Read(mem, unitNumerator, unitDenominator);
+                                }
+                                //Console.WriteLine();
+                            }
+                            break;
+                        case @".2DX":
+                            if (bemani2dx == null)
+                            {
+                                Console.WriteLine("Read Sound: " + filename);
+                                using (var mem = File.OpenRead(filename))
+                                {
+                                    bemani2dx = Bemani2DX.Read(mem);
+                                }
+                            }
+                            break;
+                        case @".S3P":
+                            if (bemani2dx == null)
+                            {
+                                Console.WriteLine("Read Sound: " + filename);
+                                //lock(lockObj)
+                                using (var mem = File.OpenRead(filename))
+                                {
+                                    bemani2dx = Bemani2DX.Read(mem);
+                                }
+                            }
+                            break;
+                    }
+                }
+            }
+
+            for(int k = 0; k < bemani1.Charts.Length; k++)
+            {
+                Chart chart = bemani1.Charts[k];
+
+                if (chart == null)
+                    continue;
+                try
+                {
+                    int lastSample = chart.UsedSamples().Last();
+                    Entry entry = new Entry();
+                    entry.LinearOffset = new Fraction(0, 1);
+                    //chart.Entries.Where(x => x.Type == EntryType.Marker && x.Player == 0).OrderBy(x => (double)x.LinearOffset).First().LinearOffset;
+                    entry.Type = EntryType.Marker;
+                    entry.Player = 0;
+                    entry.Column = 0;
+                    entry.Value = new Fraction(lastSample + 1, 1);
+
+                    Entry[] entList = new Entry[chart.Entries.Count];
+                    chart.Entries.CopyTo(entList);
+
+                    chart.Entries.RemoveAll(x => x.Type == EntryType.Marker && x.Player != 0);
+                    byte[] reuslt = RenderTo(bemani1.Charts, bemani2dx.Sounds, 0, (int)Math.Ceiling((double)chart.Entries.Last().LinearOffset / 1000), codec, false);
+
+                    chart.Entries = entList.ToList();
+                    chart.Entries.RemoveAll(x => x.Type == EntryType.Marker && x.Player == 0);
+                    //chart.Entries.RemoveAll(x => x.Type == EntryType.Measure);
+                    //chart.Entries.RemoveAll(x => x.Type == EntryType.Tempo && (int)((double)x.Value) == 32767);
+                    //chart.Entries.RemoveAll(x => x.Type == EntryType.Tempo && (int)((double)x.Value) == 1);
+                    chart.Entries.Insert(0, entry);
+
+                    using (Stream fileStream = new FileStream(args[2], FileMode.CreateNew))
+                    {
+                        bemani1.Write(fileStream, 0, 1000);
+                    };
+
+                    List<Sound> sl = bemani2dx.Sounds.ToList();
+                    Sound s = new Sound();
+                    s.Data = reuslt;
+                    s.Format = sl.First().Format;
+                    
+                    sl.Add(s);
+
+                    return sl.ToArray();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.WriteLine(e.StackTrace);
+                    return null;
+                }
+            }
+
+            return null;
+
+            //sounds = null;
+            throw new FileNotFoundException("No chart to render");
+
+        }
+
+        static public byte[] RenderTo(Chart[] charts, Sound[] sounds, int startTime, int duration, Codec codec = Codec.Wma, bool crop = false)
+        {
+            if ((sounds != null) && (charts != null))
             {
                 for (int k = 0; k < charts.Length; k++)
                 {
@@ -278,8 +419,8 @@ namespace ConvertHelper
                     try
                     {
                         //Console.WriteLine("Rendering " + k.ToString());
-                        if(codec == Codec.Wma) return ChartRenderer.RenderToWma(chart, sounds, 50, 10);
-                        else if(codec == Codec.Adpcm) return ChartRenderer.RenderToAdpcm(chart, sounds, 50, 10);
+                        if (codec == Codec.Wma) return ChartRenderer.RenderToWma(chart, sounds, startTime, duration, crop);
+                        else if (codec == Codec.Adpcm) return ChartRenderer.RenderToAdpcm(chart, sounds, startTime, duration);
                     }
                     catch (Exception e)
                     {
@@ -289,9 +430,7 @@ namespace ConvertHelper
                     }
                 }
             }
-            sounds = null;
-            throw new FileNotFoundException("No chart to render");
-
+            return null;
         }
     }
 }

@@ -351,6 +351,10 @@ namespace Scharfrichter.Codec.Charts
             {
                 return entries;
             }
+            set
+            {
+                entries = value;
+            }
         }
 
         // Measures property

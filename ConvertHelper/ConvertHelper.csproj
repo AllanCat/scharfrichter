@@ -67,6 +67,10 @@
     <Compile Include="StreamAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NAudio.WindowsMediaFormat\NAudio.WindowsMediaFormat.csproj">
+      <Project>{1868fc77-fd6f-4881-9cf5-de7451806bfa}</Project>
+      <Name>NAudio.WindowsMediaFormat</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NAudio\NAudio.csproj">
       <Project>{DA4F02E3-0B5E-42CD-B8D9-5583FA51D66E}</Project>
       <Name>NAudio</Name>
